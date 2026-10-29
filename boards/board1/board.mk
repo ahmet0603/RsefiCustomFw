@@ -45,4 +45,4 @@ DDEFS += -DEFI_HPFP=FALSE
 # LED is PD14, which collided with stepperEnablePin. mini6ch has 3 onboard
 # LEDs (PB4, PB6, PB7); PB7 is the comms LED, so use the dedicated PB4 LED for
 # critical error. This frees PD14 for stepper enable.
-DDEFS += -DLED_CRITICAL_ERROR_BRAIN_PIN=Gpio::B4
+DDEFS += -DLED_CRITICAL_ERROR_BRAIN_PIN=Gpio::B7
