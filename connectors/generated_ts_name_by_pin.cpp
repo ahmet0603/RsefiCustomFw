@@ -6,14 +6,74 @@
 // see comments at declaration in pin_repository.h
 const char* getBoardSpecificPinName(brain_pin_e brainPin) {
 	switch (brainPin) {
+		case Gpio::A15:
+			return "Fan Relay (A15)";
+		case Gpio::A8:
+			return "ETB1 PWM (A8)";
+		case Gpio::B13:
+			return "Injector 4 (B13)";
 		case Gpio::B14:
-			return "B14 Output";
+			return "Injector 3 (B14)";
+		case Gpio::B15:
+			return "Injector 2 (B15)";
+		case Gpio::B4:
+			return "Boost Control PWM (B4)";
+		case Gpio::B5:
+			return "AC Switch Input (B5)";
+		case Gpio::B6:
+			return "VVT Output (B6)";
+		case Gpio::B8:
+			return "ETB1 DIR (B8)";
+		case Gpio::B9:
+			return "ETB1 DIS (B9)";
+		case Gpio::C5:
+			return "Main Relay (C5)";
+		case Gpio::C7:
+			return "AC Compressor Relay (C7)";
+		case Gpio::C8:
+			return "Fuel Pump Relay (C8)";
+		case Gpio::C9:
+			return "Tachometer Output (C9)";
+		case Gpio::D10:
+			return "Idle 1 (D10)";
+		case Gpio::D11:
+			return "ETB2 DIS (D11)";
+		case Gpio::D12:
+			return "ETB2 DIR (D12)";
+		case Gpio::D13:
+			return "Ignition 3 (D13)";
+		case Gpio::D14:
+			return "ETB2 PWM (D14)";
+		case Gpio::D15:
+			return "High Side 12V Output (D15)";
+		case Gpio::D3:
+			return "CKP Crank Sensor (D3)";
+		case Gpio::D4:
+			return "CMP Cam Sensor (D4)";
+		case Gpio::D7:
+			return "VSS Vehicle Speed (D7)";
+		case Gpio::D8:
+			return "Injector 1 (D8)";
+		case Gpio::D9:
+			return "Injector 5 (D9)";
+		case Gpio::E12:
+			return "Clutch Input (E12)";
+		case Gpio::E13:
+			return "Launch Control Input (E13)";
+		case Gpio::E14:
+			return "Ignition 2 (E14)";
+		case Gpio::E15:
+			return "Ignition 1 (E15)";
 		case Gpio::E2:
-			return "VR/Hall 1 (E2)";
+			return "Ignition 5 (E2)";
 		case Gpio::E3:
-			return "VR/Hall 2 (E3)";
-		case Gpio::E4:
-			return "VR/Hall 3 (E4)";
+			return "Ignition 6 (E3)";
+		case Gpio::E5:
+			return "Ignition 4 (E5)";
+		case Gpio::E8:
+			return "Injector 6 (E8)";
+		case Gpio::E9:
+			return "Idle 2 (E9)";
 		default:
 			return nullptr;
 	}

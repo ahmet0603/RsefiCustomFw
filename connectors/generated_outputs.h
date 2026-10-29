@@ -4,6 +4,60 @@
 #pragma once
 
 Gpio GENERATED_OUTPUTS[] = {
-	Gpio::B14, // B14 Output
-// "B14 Output",
+	Gpio::D8, // Injector 1 (D8)
+	Gpio::B15, // Injector 2 (B15)
+	Gpio::B14, // Injector 3 (B14)
+	Gpio::B13, // Injector 4 (B13)
+	Gpio::D9, // Injector 5 (D9)
+	Gpio::E8, // Injector 6 (E8)
+	Gpio::E15, // Ignition 1 (E15)
+	Gpio::E14, // Ignition 2 (E14)
+	Gpio::D13, // Ignition 3 (D13)
+	Gpio::E5, // Ignition 4 (E5)
+	Gpio::E2, // Ignition 5 (E2)
+	Gpio::E3, // Ignition 6 (E3)
+	Gpio::C8, // Fuel Pump Relay (C8)
+	Gpio::A15, // Fan Relay (A15)
+	Gpio::C7, // AC Compressor Relay (C7)
+	Gpio::C5, // Main Relay (C5)
+	Gpio::C9, // Tachometer Output (C9)
+	Gpio::D10, // Idle 1 (D10)
+	Gpio::E9, // Idle 2 (E9)
+	Gpio::D15, // High Side 12V Output (D15)
+	Gpio::B6, // VVT Output (B6)
+	Gpio::B4, // Boost Control PWM (B4)
+	Gpio::A8, // ETB1 PWM (A8)
+	Gpio::B8, // ETB1 DIR (B8)
+	Gpio::B9, // ETB1 DIS (B9)
+	Gpio::D14, // ETB2 PWM (D14)
+	Gpio::D12, // ETB2 DIR (D12)
+	Gpio::D11, // ETB2 DIS (D11)
+// "Injector 1 (D8)",
+// "Injector 2 (B15)",
+// "Injector 3 (B14)",
+// "Injector 4 (B13)",
+// "Injector 5 (D9)",
+// "Injector 6 (E8)",
+// "Ignition 1 (E15)",
+// "Ignition 2 (E14)",
+// "Ignition 3 (D13)",
+// "Ignition 4 (E5)",
+// "Ignition 5 (E2)",
+// "Ignition 6 (E3)",
+// "Fuel Pump Relay (C8)",
+// "Fan Relay (A15)",
+// "AC Compressor Relay (C7)",
+// "Main Relay (C5)",
+// "Tachometer Output (C9)",
+// "Idle 1 (D10)",
+// "Idle 2 (E9)",
+// "High Side 12V Output (D15)",
+// "VVT Output (B6)",
+// "Boost Control PWM (B4)",
+// "ETB1 PWM (A8)",
+// "ETB1 DIR (B8)",
+// "ETB1 DIS (B9)",
+// "ETB2 PWM (D14)",
+// "ETB2 DIR (D12)",
+// "ETB2 DIS (D11)",
 }
