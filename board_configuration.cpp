@@ -1,53 +1,42 @@
 /**
  * @file board_configuration.cpp
- * Mazduino Mini 6CH v1.4 (STM32F407VGT6)
+ * Mazduino Mini 6CH v1.3C
+ * https://wiki.mazduino.com/mazduino-mini-6ch-v1.3c/
  */
 
 #include "pch.h"
-
 #include "board_overrides.h"
 
-Gpio getCommsLedPin() { return Gpio::Unassigned; }
+Gpio getCommsLedPin() { return config->communityCommsLedPin; }
 Gpio getRunningLedPin() { return Gpio::Unassigned; }
 Gpio getWarningLedPin() { return Gpio::Unassigned; }
 
 static void setupEtb() {
     // TLE9201 - PWM + DIR + DIS
-    // ETB1
-    engineConfiguration->etbIo[0].controlPin = Gpio::A8;      // PWM
-    engineConfiguration->etbIo[0].directionPin1 = Gpio::B8;   // DIR
-    engineConfiguration->etbIo[0].disablePin = Gpio::B9;      // DIS
-
-    // ETB2 (new in v1.4)
-    engineConfiguration->etbIo[1].controlPin = Gpio::D14;     // PWM
-    engineConfiguration->etbIo[1].directionPin1 = Gpio::D12;  // DIR
-    engineConfiguration->etbIo[1].disablePin = Gpio::D11;     // DIS
-
+    engineConfiguration->etbIo[0].controlPin    = Gpio::A8;  // PWM
+    engineConfiguration->etbIo[0].directionPin1 = Gpio::B8;  // DIR
+    engineConfiguration->etbIo[0].disablePin    = Gpio::B9;  // DIS
     engineConfiguration->etb_use_two_wires = false;
 }
 
 static void customBoardDefaultConfiguration() {
-    //config->communityCommsLedPin = Gpio::B7;
+    config->communityCommsLedPin = Gpio::B7;
 
     // Trigger inputs
-    engineConfiguration->triggerInputPins[0] = Gpio::D3; // CKP
-    engineConfiguration->camInputs[0] = Gpio::D4;        // CMP
+    engineConfiguration->triggerInputPins[0] = Gpio::D3;   // CKP
 
-    // Analog sensors
+    // Analog sensors - ADC1
     // PA3 (EFI_ADC_3) is reserved for knock via ADC3 - do not assign here
-    engineConfiguration->map.sensor.hwChannel = EFI_ADC_10; // PC0
-    engineConfiguration->tps1_1AdcChannel = EFI_ADC_2;      // PA2
-    engineConfiguration->afr.hwChannel = EFI_ADC_0;         // PA0 (O2)
-    engineConfiguration->clt.adcChannel = EFI_ADC_4;        // PA4
-    engineConfiguration->iat.adcChannel = EFI_ADC_5;        // PA5
-    engineConfiguration->vbattAdcChannel = EFI_ADC_7;       // PA7
-    // Spare analog inputs, not assigned here (assign in TunerStudio if needed):
-    // PB0 = EFI_ADC_8, PB1 = EFI_ADC_9, PA1 = EFI_ADC_1, PC1 = EFI_ADC_11
+    engineConfiguration->map.sensor.hwChannel  = EFI_ADC_0;  // PA0
+    engineConfiguration->afr.hwChannel         = EFI_ADC_1;  // PA1
+    engineConfiguration->tps1_1AdcChannel       = EFI_ADC_6;  // PA6
+    engineConfiguration->clt.adcChannel         = EFI_ADC_4;  // PA4
+    engineConfiguration->iat.adcChannel         = EFI_ADC_5;  // PA5
+    engineConfiguration->vbattAdcChannel        = EFI_ADC_7;  // PA7
 
     engineConfiguration->analogInputDividerCoefficient = (470.0f + 910.0f) / 910.0f; // 470R high side/910R low side
     engineConfiguration->vbattDividerCoeff = (82.0f + 10.0f) / 10.0f; // 82k high side/10k low side
     engineConfiguration->adcVcc = 3.3f;
-
     engineConfiguration->clt.config.bias_resistor = 2700;
     engineConfiguration->iat.config.bias_resistor = 2700;
 
@@ -68,29 +57,22 @@ static void customBoardDefaultConfiguration() {
     engineConfiguration->ignitionPins[5] = Gpio::E3;
 
     // Aux outputs
-    engineConfiguration->fuelPumpPin = Gpio::C8;
-    engineConfiguration->mainRelayPin = Gpio::C5;
-    engineConfiguration->idle.solenoidPin = Gpio::D10;   // Idle 1
-    engineConfiguration->secondSolenoidPin = Gpio::E9;   // Idle 2
-    engineConfiguration->fanPin = Gpio::A15;
-    engineConfiguration->tachOutputPin = Gpio::C9;
-    engineConfiguration->acRelayPin = Gpio::C7;
-    // High Side output (PD15, 12V switching) is not assigned here:
-    // assign it to a function in TunerStudio if needed.
-
-    // VVT and boost control (new in v1.4)
-    engineConfiguration->vvtPins[0] = Gpio::B6;
-    engineConfiguration->boostControlPin = Gpio::B4;
-
-    // Switch / speed inputs
-    engineConfiguration->acSwitch = Gpio::B5;
+    engineConfiguration->fuelPumpPin               = Gpio::C8;
+    engineConfiguration->mainRelayPin               = Gpio::C5;
+    engineConfiguration->idle.solenoidPin           = Gpio::D10;
+    engineConfiguration->secondSolenoidPin          = Gpio::E9;
+    engineConfiguration->fanPin                     = Gpio::A15;
+    engineConfiguration->tachOutputPin              = Gpio::C9;
+    engineConfiguration->acSwitch                   = Gpio::B5;
+    engineConfiguration->acRelayPin                 = Gpio::C7;
     engineConfiguration->vehicleSpeedSensorInputPin = Gpio::D7;
-    engineConfiguration->clutchDownPin = Gpio::E12;
-    engineConfiguration->clutchDownPinMode = PI_INVERTED_PULLUP;
-    engineConfiguration->launchActivatePin = Gpio::E13;
+    engineConfiguration->clutchDownPin              = Gpio::E12;
+    engineConfiguration->clutchDownPinMode          = PI_INVERTED_PULLUP;
 
-    // NOTE: the v1.3C stepper idle pins (PD12/PD14/PD15) are removed:
-    // on v1.4 they are used by ETB2 and the High Side output.
+    // Stepper motor idle
+    engineConfiguration->idle.stepperDirectionPin   = Gpio::D12;
+    engineConfiguration->idle.stepperStepPin        = Gpio::D15;
+    engineConfiguration->stepperEnablePin           = Gpio::D14;
 
     // CAN
     engineConfiguration->canTxPin = Gpio::D1;
@@ -105,13 +87,13 @@ static void customBoardDefaultConfiguration() {
     engineConfiguration->binarySerialRxPin = Gpio::B11;
 
     // SD card - SPI3
-    engineConfiguration->is_enabled_spi_3 = true;
-    engineConfiguration->spi3mosiPin = Gpio::C12;
-    engineConfiguration->spi3misoPin = Gpio::C11;
-    engineConfiguration->spi3sckPin = Gpio::C10;
-    engineConfiguration->isSdCardEnabled = true;
-    engineConfiguration->sdCardSpiDevice = SPI_DEVICE_3;
-    engineConfiguration->sdCardCsPin = Gpio::D2;
+    engineConfiguration->is_enabled_spi_3  = true;
+    engineConfiguration->spi3mosiPin        = Gpio::C12;
+    engineConfiguration->spi3misoPin        = Gpio::C11;
+    engineConfiguration->spi3sckPin         = Gpio::C10;
+    engineConfiguration->isSdCardEnabled    = true;
+    engineConfiguration->sdCardSpiDevice    = SPI_DEVICE_3;
+    engineConfiguration->sdCardCsPin        = Gpio::D2;
 
     // Electronic throttle - TLE9201
     setupEtb();
