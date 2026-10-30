@@ -7,7 +7,7 @@
 #include "pch.h"
 #include "board_overrides.h"
 
-Gpio getCommsLedPin() { return config->communityCommsLedPin; }
+Gpio getCommsLedPin()  { return Gpio::Unassigned; }
 Gpio getRunningLedPin() { return Gpio::Unassigned; }
 Gpio getWarningLedPin() { return Gpio::Unassigned; }
 
@@ -20,7 +20,7 @@ static void setupEtb() {
 }
 
 static void customBoardDefaultConfiguration() {
-    config->communityCommsLedPin = Gpio::B7;
+   // config->communityCommsLedPin = Gpio::B7;
 
     // Trigger inputs
     engineConfiguration->triggerInputPins[0] = Gpio::D3;   // CKP
