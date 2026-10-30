@@ -35,7 +35,7 @@ static void customBoardDefaultConfiguration() {
     engineConfiguration->vbattAdcChannel        = EFI_ADC_7;  // PA7
 
     engineConfiguration->analogInputDividerCoefficient = (470.0f + 910.0f) / 910.0f; // 470R high side/910R low side
-    engineConfiguration->vbattDividerCoeff = (82.0f + 10.0f) / 10.0f; // 82k high side/10k low side
+    engineConfiguration->vbattDividerCoeff = 9.25f; // 82k high side/10k low side
     engineConfiguration->adcVcc = 3.3f;
     engineConfiguration->clt.config.bias_resistor = 2700;
     engineConfiguration->iat.config.bias_resistor = 2700;
